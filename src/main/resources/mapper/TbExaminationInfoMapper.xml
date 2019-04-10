@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wen.mapper.TbExaminationInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wen.pojo.TbExaminationInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stuId" property="stuid" jdbcType="INTEGER" />
+    <result column="kemu" property="kemu" jdbcType="VARCHAR" />
+    <result column="skScore" property="skscore" jdbcType="INTEGER" />
+    <result column="sbScore" property="sbscore" jdbcType="INTEGER" />
+    <result column="lkScore" property="lkscore" jdbcType="INTEGER" />
+    <result column="lbScore" property="lbscore" jdbcType="INTEGER" />
+    <result column="zkzh" property="zkzh" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stuId, kemu, skScore, sbScore, lkScore, lbScore, zkzh, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wen.pojo.TbExaminationInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_examination_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_examination_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_examination_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wen.pojo.TbExaminationInfoExample" >
+    delete from tb_examination_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wen.pojo.TbExaminationInfo" >
+    insert into tb_examination_info (id, stuId, kemu, 
+      skScore, sbScore, lkScore, 
+      lbScore, zkzh, state
+      )
+    values (#{id,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{kemu,jdbcType=VARCHAR}, 
+      #{skscore,jdbcType=INTEGER}, #{sbscore,jdbcType=INTEGER}, #{lkscore,jdbcType=INTEGER}, 
+      #{lbscore,jdbcType=INTEGER}, #{zkzh,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wen.pojo.TbExaminationInfo" >
+    insert into tb_examination_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stuid != null" >
+        stuId,
+      </if>
+      <if test="kemu != null" >
+        kemu,
+      </if>
+      <if test="skscore != null" >
+        skScore,
+      </if>
+      <if test="sbscore != null" >
+        sbScore,
+      </if>
+      <if test="lkscore != null" >
+        lkScore,
+      </if>
+      <if test="lbscore != null" >
+        lbScore,
+      </if>
+      <if test="zkzh != null" >
+        zkzh,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="kemu != null" >
+        #{kemu,jdbcType=VARCHAR},
+      </if>
+      <if test="skscore != null" >
+        #{skscore,jdbcType=INTEGER},
+      </if>
+      <if test="sbscore != null" >
+        #{sbscore,jdbcType=INTEGER},
+      </if>
+      <if test="lkscore != null" >
+        #{lkscore,jdbcType=INTEGER},
+      </if>
+      <if test="lbscore != null" >
+        #{lbscore,jdbcType=INTEGER},
+      </if>
+      <if test="zkzh != null" >
+        #{zkzh,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wen.pojo.TbExaminationInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tb_examination_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_examination_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null" >
+        stuId = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kemu != null" >
+        kemu = #{record.kemu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skscore != null" >
+        skScore = #{record.skscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.sbscore != null" >
+        sbScore = #{record.sbscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.lkscore != null" >
+        lkScore = #{record.lkscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.lbscore != null" >
+        lbScore = #{record.lbscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.zkzh != null" >
+        zkzh = #{record.zkzh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_examination_info
+    set id = #{record.id,jdbcType=INTEGER},
+      stuId = #{record.stuid,jdbcType=INTEGER},
+      kemu = #{record.kemu,jdbcType=VARCHAR},
+      skScore = #{record.skscore,jdbcType=INTEGER},
+      sbScore = #{record.sbscore,jdbcType=INTEGER},
+      lkScore = #{record.lkscore,jdbcType=INTEGER},
+      lbScore = #{record.lbscore,jdbcType=INTEGER},
+      zkzh = #{record.zkzh,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wen.pojo.TbExaminationInfo" >
+    update tb_examination_info
+    <set >
+      <if test="stuid != null" >
+        stuId = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="kemu != null" >
+        kemu = #{kemu,jdbcType=VARCHAR},
+      </if>
+      <if test="skscore != null" >
+        skScore = #{skscore,jdbcType=INTEGER},
+      </if>
+      <if test="sbscore != null" >
+        sbScore = #{sbscore,jdbcType=INTEGER},
+      </if>
+      <if test="lkscore != null" >
+        lkScore = #{lkscore,jdbcType=INTEGER},
+      </if>
+      <if test="lbscore != null" >
+        lbScore = #{lbscore,jdbcType=INTEGER},
+      </if>
+      <if test="zkzh != null" >
+        zkzh = #{zkzh,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wen.pojo.TbExaminationInfo" >
+    update tb_examination_info
+    set stuId = #{stuid,jdbcType=INTEGER},
+      kemu = #{kemu,jdbcType=VARCHAR},
+      skScore = #{skscore,jdbcType=INTEGER},
+      sbScore = #{sbscore,jdbcType=INTEGER},
+      lkScore = #{lkscore,jdbcType=INTEGER},
+      lbScore = #{lbscore,jdbcType=INTEGER},
+      zkzh = #{zkzh,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
