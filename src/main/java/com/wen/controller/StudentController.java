@@ -88,15 +88,8 @@ public class StudentController {
 		//报名，更新报名状态信息
 		@RequestMapping("updateStatus")
 		public String  updateStatus(TbUser user,String kemu,HttpSession session,Integer stuid){
-			System.out.println(user);
+			//status为2表明 已提交报名，状态为核审中
 			user.setStatus(2);
-			/*userService.updateStatus(user);
-			student.setId(stuId);...
-			studenService.updateKemu(student);
-			User u = userService.selectUserById(user.getId());
-			
-			
-			session.setAttribute("user", u);*/
 			userService.updateUser(user);
 			TbUser u = userService.selectUserById(user.getId());
 			u.setPassword(null);

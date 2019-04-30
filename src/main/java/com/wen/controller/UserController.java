@@ -47,25 +47,17 @@ public class UserController {
 	}
 
 	// 考生须知
-	/*@RequestMapping("candidateNotice")
-	public String candidateNotice() {
-		return "CandidateNotice";
-	}*/
 	@RequestMapping("candidateNotice")
 	public String candidateNotice(Integer id,Model model) {
-		if(id==null){
-			id = 1;
-		}
-		TbNotice notice = noticeMapper.selectByPrimaryKey(id);
 		List<TbNotice> noticeList = noticeMapper.selectByExample(null);
-		if(noticeList!=null && noticeList.size()>0){
-			for (TbNotice tbNotice : noticeList) {
-				System.out.println(tbNotice);
-				
-			}
+		TbNotice notice = new TbNotice();
+		if(id!=null){
+		notice = noticeMapper.selectByPrimaryKey(id);
+		}else if(id==null&&!noticeList.isEmpty()){
+			notice = noticeList.get(noticeList.size()-1);
 		}
-		model.addAttribute("notice", notice);
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("notice", notice);
 		return "CandidateNotice";
 	}
 
@@ -180,9 +172,12 @@ public class UserController {
 			System.out.println("验证码不正确！");
 			return "CetLogin";
 		}
-		TbUser user1 = userService.selectUserByUsername(user.getUsername()).get(0);
-		System.out.println(MD5Util.md5(user.getPassword()));
-		System.out.println(user1.getPassword());
+		List<TbUser> userList = userService.selectUserByUsername(user.getUsername());
+		if(userList==null||userList.isEmpty()){
+			model.addAttribute("error", "账户或密码错误！");
+			return "CetLogin";
+		}
+		TbUser user1 = userList.get(0);
 		if (user1.getState() != 2) {
 			model.addAttribute("error", "您的账户还未激活，请到邮箱中激活账户！");
 			return "CetLogin";

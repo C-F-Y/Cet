@@ -94,7 +94,7 @@ public class adminController {
 	 学校编号（5）+校区号（1）+考试时间（3）+ 语种（1）+ 考场号（3）+座位号（2）
 	 学校编号：数据库查
 	校区号：统一为1
-	考试时间：182    18年第二次考试
+	考试时间：191    19年第一次考试
 	语种：数据库查    1:四级口试  2：四级笔试 3：六级口试 4：六级笔试
 	考场号：学号最后5位中的 前三位
 	座位号：用学号最后两位
@@ -114,7 +114,6 @@ public class adminController {
 		TbExaminationInfo examInfo = examinationInfoService.selectExamInfo(user2.getStuid()).get(0);
 		//学校编号
 		String schoolNumber = schoolService.selectSchoolNum(student.getSchool());
-		
 		//试室号+座位号 准考证最后5位，加5个0是防止位数不够
 		String ssh_zwh = ("00000"+student.getXuehao()).substring(("00000"+student.getXuehao()).length()-5);
 		//考试语种
@@ -128,7 +127,7 @@ public class adminController {
 		}else if(examInfo.getKemu().equals("英语六级笔试")){
 			yuzhong = "4";
 		}
-		String zkzh = schoolNumber+"1"+"182"+yuzhong+ssh_zwh;
+		String zkzh = schoolNumber+"1"+"192"+yuzhong+ssh_zwh;
 		TbExaminationInfo examInfo2 = new TbExaminationInfo();
 		examInfo2.setId(examInfo.getId());
 		examInfo2.setZkzh(zkzh);

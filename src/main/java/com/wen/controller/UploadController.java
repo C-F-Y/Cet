@@ -10,15 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wen.pojo.TbStudent;
 import com.wen.service.StudentService;
-import com.wen.test.ExcelReaderUtil;
+import com.wen.util.ExcelReaderUtil;
 
 @Controller
 public class UploadController {
@@ -34,7 +32,6 @@ public class UploadController {
         	model.addAttribute("tip", "上传失败");
             return "admin/upload";
         }
-
         String fileName = file.getOriginalFilename();
         String filePath = "D:/upload/";
         File dest = new File(filePath + fileName);
@@ -43,7 +40,6 @@ public class UploadController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-       // String path = "d:/student.xlsx";
         String path = filePath+fileName;
         List<TbStudent> studentList = new ArrayList<>();
         try{
@@ -64,7 +60,6 @@ public class UploadController {
             	student.setRuxuetime(list.get(10));
             	student.setPhone(list.get(11));
             	studentList.add(student);
-                
         }
         }catch(Exception e){
         	e.printStackTrace();
@@ -77,7 +72,5 @@ public class UploadController {
 		model.addAttribute("tip", "导入信息成功");
         return "admin/inputInfo";
         
-        
-//        return "上传失败！";
     }
 }

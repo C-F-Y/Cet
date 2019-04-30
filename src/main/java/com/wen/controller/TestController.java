@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wen.pojo.TbStudent;
-import com.wen.test.ExcelReaderUtil;
+import com.wen.util.ExcelReaderUtil;
 @Controller
 public class TestController {
 	
@@ -74,11 +74,7 @@ public class TestController {
         }
         return null;
 	}
-	@RequestMapping("hello")
-	@ResponseBody
-	public String hello(){
-		return "hello";
-	}
+
 	@RequestMapping("read")
 	public String test2(){
 			

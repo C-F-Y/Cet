@@ -43,7 +43,7 @@
 							考试科目：
 						</td>
 						<td>
-						<select id="kemu" name="kemu" class="form-control" required="" data-bv-notempty-message="请选择考试科目">
+						<select id="kemu" name="kemu" class="form-control" data-bv-notempty-message="请选择考试科目">
 							<option value="">- 请选择 -</option>
 							<option value="英语四级口语">英语四级口语</option>
 							<option value="英语四级笔试">英语四级笔试</option>
